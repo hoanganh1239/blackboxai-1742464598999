@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Học Từ Vựng Tiếng Anh - LearnEnglish</title>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#4F46E5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="LearnEnglish">
+    <link rel="apple-touch-icon" href="/icons/icon-152x152.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior-y: contain;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .word-card {
+            perspective: 1000px;
+            height: 500px;
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+        .word-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        .word-card.flipped .word-card-inner {
+            transform: rotateY(180deg);
+        }
+        .word-card-front, .word-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 1.5rem;
+            background: white;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .word-card-back {
+            transform: rotateY(180deg);
+            background: #f8fafc;
+        }
+        .btn-hover {
+            transition: all 0.3s ease;
+        }
+        .btn-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .btn-hover:active {
+            transform: translateY(0);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #4F46E5;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .btn-primary {
+            @apply bg-indigo-600 text-white px-6 py-3 rounded-full hover:bg-indigo-700 transition-colors btn-hover flex items-center justify-center space-x-2;
+        }
+        .btn-secondary {
+            @apply bg-gray-600 text-white px-6 py-3 rounded-full hover:bg-gray-700 transition-colors btn-hover flex items-center justify-center space-x-2;
+        }
+        .btn-success {
+            @apply bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700 transition-colors btn-hover flex items-center justify-center space-x-2;
+        }
+        .btn-outline {
+            @apply border-2 px-6 py-3 rounded-full transition-colors btn-hover flex items-center justify-center space-x-2;
+        }
+        .btn-audio {
+            @apply bg-indigo-100 text-indigo-600 border-2 border-indigo-200 hover:bg-indigo-200 btn-outline;
+        }
+        .btn-flip {
+            @apply bg-green-100 text-green-600 border-2 border-green-200 hover:bg-green-200 btn-outline;
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 640px) {
+            .word-card {
+                height: 400px;
+            }
+            .word-card-front, .word-card-back {
+                padding: 1rem;
+            }
+            .btn-primary, .btn-secondary, .btn-success, .btn-outline {
+                padding: 0.75rem 1rem;
+            }
+            h3 {
+                font-size: 1.5rem;
+            }
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+
+        /* Add to Home Screen prompt */
+        #pwa-prompt {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 1rem;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            display: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md fixed w-full top-0 z-50">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <i class="fas fa-graduation-cap text-3xl text-indigo-600"></i>
+                    <span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">LearnEnglish</span>
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-gray-600 hover:text-indigo-600">Trang Chủ</a>
+                    <a href="#topics" class="nav-link text-gray-600 hover:text-indigo-600">Chủ Đề</a>
+                    <a href="#practice" class="nav-link text-gray-600 hover:text-indigo-600">Luyện Tập</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-20">
+        <!-- Topics Section -->
+        <section id="topics" class="py-12">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-8">Chọn Chủ Đề Học Tập</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Basic Conversations -->
+                    <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div class="p-6">
+                            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                                <i class="fas fa-comments text-3xl text-blue-600"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2 text-center">Giao Tiếp Cơ Bản</h3>
+                            <p class="text-gray-600 mb-6 text-center">Học từ vựng về chào hỏi, giới thiệu và giao tiếp hàng ngày</p>
+                            <button onclick="startLesson('basic-conversations')" class="btn-primary w-full">
+                                <span>Bắt đầu học</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                            <div class="mt-4">
+                                <div class="bg-gray-200 rounded-full h-2 overflow-hidden">
+                                    <div id="progress-basic-conversations" class="progress-bar bg-blue-600 h-full w-0"></div>
+                                </div>
+                                <p class="text-sm text-gray-600 mt-2 text-right">
+                                    <span id="progress-text-basic-conversations">0/5 từ</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Family -->
+                    <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div class="p-6">
+                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                                <i class="fas fa-home text-3xl text-green-600"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2 text-center">Gia Đình và Bạn Bè</h3>
+                            <p class="text-gray-600 mb-6 text-center">Từ vựng về quan hệ gia đình, bạn bè và các mối quan hệ xã hội</p>
+                            <button onclick="startLesson('family')" class="btn-success w-full">
+                                <span>Bắt đầu học</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                            <div class="mt-4">
+                                <div class="bg-gray-200 rounded-full h-2 overflow-hidden">
+                                    <div id="progress-family" class="progress-bar bg-green-600 h-full w-0"></div>
+                                </div>
+                                <p class="text-sm text-gray-600 mt-2 text-right">
+                                    <span id="progress-text-family">0/5 từ</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- School -->
+                    <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div class="p-6">
+                            <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                                <i class="fas fa-school text-3xl text-purple-600"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2 text-center">Trường Học</h3>
+                            <p class="text-gray-600 mb-6 text-center">Từ vựng về trường học, lớp học và các hoạt động học tập</p>
+                            <button onclick="startLesson('school')" class="btn-primary w-full" style="background: #9333ea;">
+                                <span>Bắt đầu học</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                            <div class="mt-4">
+                                <div class="bg-gray-200 rounded-full h-2 overflow-hidden">
+                                    <div id="progress-school" class="progress-bar bg-purple-600 h-full w-0"></div>
+                                </div>
+                                <p class="text-sm text-gray-600 mt-2 text-right">
+                                    <span id="progress-text-school">0/5 từ</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Section -->
+        <section id="learning" class="py-12 bg-gray-100 hidden">
+            <div class="container mx-auto px-4">
+                <div class="mb-6 flex justify-between items-center">
+                    <button onclick="backToTopics()" class="nav-link text-indigo-600 hover:text-indigo-800 flex items-center space-x-2">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Quay lại chủ đề</span>
+                    </button>
+                    <div class="flex space-x-4">
+                        <button onclick="previousWord()" class="btn-secondary">
+                            <i class="fas fa-chevron-left"></i>
+                            <span>Từ trước</span>
+                        </button>
+                        <button onclick="nextWord()" class="btn-secondary">
+                            <span>Từ tiếp</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Word Card -->
+                <div class="word-card mb-8" onclick="flipCard()">
+                    <div class="word-card-inner">
+                        <div class="word-card-front">
+                            <!-- Front content will be inserted here by JavaScript -->
+                        </div>
+                        <div class="word-card-back">
+                            <!-- Back content will be inserted here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="max-w-2xl mx-auto">
+                    <div class="bg-gray-200 rounded-full h-2 overflow-hidden">
+                        <div id="progress-current" class="bg-indigo-600 h-full w-0 transition-all duration-300"></div>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2 text-right">
+                        <span id="progress-text-current">0/5 từ</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practice Section -->
+        <section id="practice" class="py-12">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-8">Luyện Tập</h2>
+                <div id="quiz-container" class="max-w-2xl mx-auto">
+                    <!-- Quiz content will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 LearnEnglish. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- PWA Install Prompt -->
+    <div id="pwa-prompt" class="hidden">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <img src="/icons/icon-96x96.png" alt="LearnEnglish" class="w-12 h-12">
+                <div>
+                    <h3 class="font-bold">Cài đặt LearnEnglish</h3>
+                    <p class="text-sm text-gray-600">Thêm ứng dụng vào màn hình chính</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button onclick="dismissPWAPrompt()" class="px-4 py-2 text-gray-600">Để sau</button>
+                <button onclick="installPWA()" class="px-4 py-2 bg-indigo-600 text-white rounded-lg">Cài đặt</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/vocabulary.js"></script>
+    <script>
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+
+        // PWA Install Prompt
+        let deferredPrompt;
+        const pwaPrompt = document.getElementById('pwa-prompt');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            pwaPrompt.classList.remove('hidden');
+        });
+
+        function installPWA() {
+            pwaPrompt.classList.add('hidden');
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        }
+
+        function dismissPWAPrompt() {
+            pwaPrompt.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

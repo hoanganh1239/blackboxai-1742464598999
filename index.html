@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn English - Học Tiếng Anh Vui</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #4F46E5;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md fixed w-full top-0 z-50">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-graduation-cap text-3xl text-indigo-600 animate-float"></i>
+                    <span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">LearnEnglish</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-gray-600 hover:text-indigo-600 transition-colors duration-300">Trang Chủ</a>
+                    <a href="#lessons" class="nav-link text-gray-600 hover:text-indigo-600 transition-colors duration-300">Bài Học</a>
+                    <a href="#quiz" class="nav-link text-gray-600 hover:text-indigo-600 transition-colors duration-300">Kiểm Tra</a>
+                    <a href="#contact" class="nav-link text-gray-600 hover:text-indigo-600 transition-colors duration-300">Liên Hệ</a>
+                </div>
+                <button class="md:hidden text-gray-600" id="mobile-menu-button">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            <!-- Mobile menu -->
+            <div class="mobile-menu md:hidden" id="mobile-menu">
+                <a href="#home" class="text-gray-600 hover:text-indigo-600">Trang Chủ</a>
+                <a href="#lessons" class="text-gray-600 hover:text-indigo-600">Bài Học</a>
+                <a href="#quiz" class="text-gray-600 hover:text-indigo-600">Kiểm Tra</a>
+                <a href="#contact" class="text-gray-600 hover:text-indigo-600">Liên Hệ</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-24 pb-12 gradient-bg text-white">
+        <div class="container mx-auto px-4 py-16">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">Học Tiếng Anh Vui Vẻ!</h1>
+                <p class="text-xl md:text-2xl mb-8">Khám phá thế giới tiếng Anh qua các bài học thú vị và trò chơi hấp dẫn</p>
+                <a href="#lessons" class="bg-white text-indigo-600 px-8 py-3 rounded-full font-semibold hover:bg-indigo-50 transition-all duration-300 transform hover:scale-105 inline-flex items-center">
+                    Bắt Đầu Ngay <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lessons Section -->
+    <section id="lessons" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Bài Học</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Vocabulary Card -->
+                <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-book text-2xl text-blue-600"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Từ Vựng</h3>
+                        <p class="text-gray-600 mb-4">Học từ vựng qua hình ảnh và ví dụ thực tế</p>
+                        <a href="vocabulary.html" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold group">
+                            Học Ngay <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Grammar Card -->
+                <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-pencil-alt text-2xl text-green-600"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Ngữ Pháp</h3>
+                        <p class="text-gray-600 mb-4">Làm chủ ngữ pháp với các bài tập tương tác</p>
+                        <a href="#" class="inline-flex items-center text-green-600 hover:text-green-800 font-semibold group">
+                            Học Ngay <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Conversation Card -->
+                <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-comments text-2xl text-purple-600"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Hội Thoại</h3>
+                        <p class="text-gray-600 mb-4">Luyện nói qua các tình huống giao tiếp thường ngày</p>
+                        <a href="#" class="inline-flex items-center text-purple-600 hover:text-purple-800 font-semibold group">
+                            Học Ngay <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section id="quiz" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Kiểm Tra Kiến Thức</h2>
+            <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-8">
+                <div class="quiz-container">
+                    <h3 class="text-xl font-semibold mb-4">Câu hỏi mẫu:</h3>
+                    <p class="mb-4 text-lg">What is the correct translation of "Hello" in Vietnamese?</p>
+                    <form id="quiz-form" class="space-y-4">
+                        <div class="flex items-center space-x-2 p-3 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                            <input type="radio" id="answer1" name="answer" value="xin chao" class="w-5 h-5 text-indigo-600">
+                            <label for="answer1" class="cursor-pointer w-full text-lg">Xin chào</label>
+                        </div>
+                        <div class="flex items-center space-x-2 p-3 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                            <input type="radio" id="answer2" name="answer" value="tam biet" class="w-5 h-5 text-indigo-600">
+                            <label for="answer2" class="cursor-pointer w-full text-lg">Tạm biệt</label>
+                        </div>
+                        <div class="flex items-center space-x-2 p-3 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                            <input type="radio" id="answer3" name="answer" value="cam on" class="w-5 h-5 text-indigo-600">
+                            <label for="answer3" class="cursor-pointer w-full text-lg">Cảm ơn</label>
+                        </div>
+                        <button type="submit" class="w-full bg-indigo-600 text-white px-6 py-3 rounded-full hover:bg-indigo-700 transition-all duration-300">
+                            <span>Kiểm Tra</span>
+                            <i class="fas fa-check-circle ml-2"></i>
+                        </button>
+                    </form>
+                    <div id="quiz-result" class="mt-4 hidden"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Liên Hệ</h2>
+            <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-8">
+                <form class="space-y-6">
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-medium" for="name">Họ và Tên</label>
+                        <input type="text" id="name" class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all" placeholder="Nhập họ và tên của bạn">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-medium" for="email">Email</label>
+                        <input type="email" id="email" class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all" placeholder="Nhập địa chỉ email của bạn">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-medium" for="message">Tin nhắn</label>
+                        <textarea id="message" rows="4" class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all" placeholder="Nhập nội dung tin nhắn"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-indigo-600 text-white px-8 py-3 rounded-full hover:bg-indigo-700 transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
+                        <span>Gửi Tin Nhắn</span>
+                        <i class="fas fa-paper-plane ml-2"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Về Chúng Tôi</h3>
+                    <p class="text-gray-200 leading-relaxed">Chúng tôi cam kết mang đến phương pháp học tiếng Anh hiệu quả và thú vị cho người Việt trẻ.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Liên Kết</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-200 hover:text-white transition-colors">Điều Khoản Sử Dụng</a></li>
+                        <li><a href="#" class="text-gray-200 hover:text-white transition-colors">Chính Sách Bảo Mật</a></li>
+                        <li><a href="#" class="text-gray-200 hover:text-white transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Theo Dõi</h3>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-200 hover:text-white transition-colors transform hover:scale-110">
+                            <i class="fab fa-facebook text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-200 hover:text-white transition-colors transform hover:scale-110">
+                            <i class="fab fa-twitter text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-200 hover:text-white transition-colors transform hover:scale-110">
+                            <i class="fab fa-instagram text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-200 hover:text-white transition-colors transform hover:scale-110">
+                            <i class="fab fa-youtube text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-700 text-center">
+                <p class="text-gray-200">&copy; 2024 LearnEnglish. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Quiz functionality
+        document.getElementById('quiz-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const answer = document.querySelector('input[name="answer"]:checked');
+            const resultDiv = document.getElementById('quiz-result');
+            
+            if (!answer) {
+                alert('Vui lòng chọn một đáp án!');
+                return;
+            }
+
+            resultDiv.classList.remove('hidden');
+            if (answer.value === 'xin chao') {
+                resultDiv.innerHTML = '<div class="bg-green-100 text-green-700 p-4 rounded-lg flex items-center"><i class="fas fa-check-circle text-xl mr-2"></i><p class="font-semibold">Chính xác! Bạn làm rất tốt!</p></div>';
+            } else {
+                resultDiv.innerHTML = '<div class="bg-red-100 text-red-700 p-4 rounded-lg flex items-center"><i class="fas fa-times-circle text-xl mr-2"></i><p class="font-semibold">Chưa đúng. Hãy thử lại!</p></div>';
+            }
+        });
+
+        // Mobile menu toggle
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('show');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
+                mobileMenu.classList.remove('show');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                mobileMenu.classList.remove('show'); // Close mobile menu when clicking a link
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
